@@ -38,11 +38,12 @@ def calculate_delivery_cost(weight: float, distance: int, package_type: str, is_
     # Логика расчета времени транспортировки
     current_date = datetime.date(2026, 9, 3)  # Фиксированная дата отправки
 
-    days_needed = max(1, distance // 500)
+    days_needed = max(1, distance // 500) #доставка минимум 1 день и до 500 она остается 1 день
 
     if is_express:
-        days_needed = days_needed // 2
+        days_needed = days_needed // 2 #если доставка экспресс, то в 2 раза быстрее
 
     delivery_date = current_date + datetime.timedelta(days=days_needed)
+    #datetime.timedelta(days=N) — создаёт объект «интервал в N дней»
 
     return int(total_cost), delivery_date.strftime("%Y-%m-%d")

@@ -15,7 +15,7 @@ class TestDeliveryCost(unittest.TestCase):
     def test_invalid_weight_too_small(self):
         """Вес меньше 0.1 кг — ошибка"""
         cost, date = calculate_delivery_cost(0.05, 100, "обычный")
-        self.assertEqual(cost, -1)
+        self.assertEqual(cost, -1) #self.assertEqual(фактический_результат, ожидаемое_значение)
         self.assertEqual(date, "0000-00-00")
 
     def test_invalid_weight_too_large(self):
@@ -73,7 +73,7 @@ class TestDeliveryCost(unittest.TestCase):
         """Вес ровно 5 кг — коэффициент не должен применяться"""
         # База: 200 + 100*5 = 700
         cost, date = calculate_delivery_cost(5, 100, "обычный")
-        self.assertEqual(cost, 700)  # БАГ? Может быть не 700
+        self.assertEqual(cost, 700)
 
     def test_weight_exactly_20_kg(self):
         """Вес ровно 20 кг — коэффициент 1.5"""
@@ -98,11 +98,11 @@ class TestDeliveryCost(unittest.TestCase):
     # Экспресс-доставка (ТУТ БАГ!)
     def test_express_more_expensive_than_regular(self):
         """Экспресс должен быть ДОРОЖЕ обычной доставки — это баг!"""
-        regular_cost, _ = calculate_delivery_cost(1, 100, "обычный", is_express=False)
+        regular_cost, _ = calculate_delivery_cost(1, 100, "обычный", is_express=False) #дата не нужна
         express_cost, _ = calculate_delivery_cost(1, 100, "обычный", is_express=True)
         # Обычно экспресс дороже. В коде он умножается на 0.5 — это баг.
         self.assertGreater(express_cost, regular_cost,
-                           "БАГ: Экспресс должен быть дороже, а не дешевле!")
+                           "БАГ: Экспресс должен быть дороже, а не дешевле!") #текст появится в отчёте, если тест упадёт
 
     # Дата доставки
     def test_delivery_date_format(self):

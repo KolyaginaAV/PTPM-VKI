@@ -56,8 +56,12 @@ class TestGetTriangleType(unittest.TestCase):
         self.assertEqual(get_triangle_type(1, 2, 10), "не треугольник")
 
     def test_not_a_triangle_sum_equal(self):
-        """Сумма двух сторон равна третьей — не треугольник (вырожденный)"""
+        """Сумма двух сторон равна третьей — не треугольник"""
         self.assertEqual(get_triangle_type(1, 2, 3), "не треугольник")
+
+    def test_not_a_triangle_sum_equal_bug(self):
+        """Сумма двух сторон равна третьей — не треугольник"""
+        self.assertEqual(get_triangle_type(0.1, 0.2, 0.3), "разносторонний")
 
     def test_zero_side_is_not_triangle(self):
         """Нулевая сторона — не треугольник"""
@@ -76,16 +80,16 @@ class TestCalculateVertices(unittest.TestCase):
         """Каждая точка — это кортеж из двух целых чисел"""
         vertices = calculate_vertices(3, 4, 5)
         for point in vertices:
-            self.assertIsInstance(point, tuple)
-            self.assertEqual(len(point), 2)
-            self.assertIsInstance(point[0], int)
+            self.assertIsInstance(point, tuple) #это 1 кортеж из координат
+            self.assertEqual(len(point), 2) #длина кортежа равна ли 2
+            self.assertIsInstance(point[0], int) #числа в кортеже целые
             self.assertIsInstance(point[1], int)
 
     def test_points_inside_100x100(self):
         """Все точки находятся в границах поля 100x100"""
         vertices = calculate_vertices(3, 4, 5)
         for x, y in vertices:
-            self.assertGreaterEqual(x, 0)
+            self.assertGreaterEqual(x, 0) #x>=0
             self.assertLessEqual(x, 100)
             self.assertGreaterEqual(y, 0)
             self.assertLessEqual(y, 100)
@@ -94,9 +98,9 @@ class TestCalculateVertices(unittest.TestCase):
         """Для равностороннего треугольника точки симметричны"""
         vertices = calculate_vertices(5, 5, 5)
         # Верхняя точка должна быть примерно посередине по x
-        xs = [p[0] for p in vertices]
+        xs = [p[0] for p in vertices] #x всех 3 точек в одном кортеже
         self.assertAlmostEqual(max(xs) - min(xs), max(xs) - min(xs), delta=1)
-
+        #AlmostEqual - почти равны: delta=1 - погрешность 1
 
 if __name__ == '__main__':
     unittest.main()

@@ -2,7 +2,7 @@ import logging
 import sys
 import math
 
-#1. НАСТРОЙКА ЛОГИРОВАНИЯ
+#Настройка логирования
 log_format = "%(asctime)s | [%(levelname)-7s] | %(message)s"
 date_format = "%Y-%m-%d %H:%M:%S"
 
@@ -21,7 +21,7 @@ logging.basicConfig(
     ]
 )
 
-# 2. ЛОГИКА РАБОТЫ С ТРЕУГОЛЬНИКОМ
+# Логика работы с треугольником
 def parse_side(value: str) -> float | None:
     """
     Преобразует строку в число. Возвращает None, если данные нечисловые
@@ -37,12 +37,7 @@ def parse_side(value: str) -> float | None:
 
 
 def get_triangle_type(a: float, b: float, c: float) -> str:
-    """
-    Определяет тип треугольника.
-    Возвращает строку: 'равносторонний', 'равнобедренный',
-    'разносторонний' или 'не треугольник'.
-    """
-    # Проверка неравенства треугольника
+    # Проверка треугольник ли это
     if a + b <= c or a + c <= b or b + c <= a:
         return "не треугольник"
 
@@ -85,7 +80,6 @@ def calculate_vertices(a: float, b: float, c: float) -> list[tuple[int, int]]:
 
     return [scale_point(ax, ay), scale_point(bx, by), scale_point(cx, cy)]
 
-# 3. ОСНОВНАЯ ФУНКЦИЯ
 def main():
     logging.info("Приложение запущено")
 
