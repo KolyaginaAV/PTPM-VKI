@@ -1,0 +1,19 @@
+# Служебные файлы PyCharm
+.idea/
+*.iml
+
+# Результаты coverage
+.coverage
+htmlcov/
+
+# Кэш Python
+__pycache__/
+*.py[cod]
+
+# Виртуальное окружение
+venv/
+env/
+
+# Результаты coverage
+.coverage
+htmlcov/
